@@ -1,0 +1,25 @@
+//std.ops
+sig add<T, Output>(Self, T) Output
+
+//
+record Vec2 (
+    x: int,
+    y: int
+)
+
+f new(int x, int y) Vec2 {
+    Vec2 ( x, x )
+}
+
+impl add(Vec2 lhs, Vec2 rhs) Vec2 {
+    Vec2 (
+        lhs.x + rhs.x,
+        lhs.y + rhs.y
+    )
+}
+
+//
+use Vec2. from
+f main() {
+    int a = 1;
+}
