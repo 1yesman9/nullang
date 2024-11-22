@@ -1,0 +1,38 @@
+record RangeIter {
+    int current,
+    int end
+}
+
+impl newRangeIter(int start, int end) RangeIter {
+    return RangeIter {
+        current = start,
+        end = end
+    }
+}
+
+//iterator interface
+impl next(RangeIter iter) int {
+    int current = iter.current
+    if current > iter.end { return 0 }
+    iter.current = iter.current + 1
+    return current
+}
+
+impl main() int {
+    RangeIter rangeIter = newRangeIter(2,100)
+
+    for result in rangeIter {
+        print(result)
+    }
+
+    -->
+
+    Iterator iter = rangeIter
+    int v = next(iter)
+    while let Some(result) = v {
+        print(result)
+        v = next(iter)
+    }
+
+    return 1
+}

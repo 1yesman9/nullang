@@ -1,0 +1,32 @@
+
+module std {
+    module ops {
+        impl add(int lhs, int rhs) int {
+            return CALL ( 1, lhs, rhs )
+        }
+
+        impl sub(int lhs, int rhs) int {
+            return CALL ( 2, lhs, rhs )
+        }
+
+        impl mul(int lhs, int rhs) int {
+            return CALL ( 3, lhs, rhs )
+        }
+
+        impl div(int lhs, int rhs) int {
+            return CALL ( 4, lhs, rhs )
+        }
+
+        impl lt(int lhs, int rhs) bool {
+            return CALL ( 5, lhs, rhs )
+        }
+
+        impl gt(int lhs, int rhs) bool {
+            return CALL ( 6, lhs, rhs )
+        }
+    }
+}
+
+impl print(int n) int {
+    return CALL ( 7, n )
+}

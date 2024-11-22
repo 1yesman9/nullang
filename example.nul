@@ -1,25 +1,71 @@
-//std.ops
-sig add<T, Output>(Self, T) Output
-
-//
-record Vec2 (
-    x: int,
-    y: int
-)
-
-f new(int x, int y) Vec2 {
-    Vec2 ( x, x )
+record Vec {
+    Arr<int> buffer,
+    int len,
+    int capacity
 }
 
-impl add(Vec2 lhs, Vec2 rhs) Vec2 {
-    Vec2 (
-        lhs.x + rhs.x,
-        lhs.y + rhs.y
-    )
+impl new() Vec {
+    return Vec { 
+        buffer = [],
+        len = 0,
+        capacity = 0 
+    }
 }
 
-//
-use Vec2. from
-f main() {
-    int a = 1;
+impl realloc(Vec vec) bool {
+    Vec old_buffer = vec.buffer
+    vec.buffer = CALL (8, vec.capacity * 4)
+
+    int i = 0
+    while i < vec.len {
+        vec.buffer[i] = old_buffer[i]
+        i = i + 1
+    }
+
+    return true
+}
+
+impl push(Vec vec, int element) bool {
+    //reallocate
+    if vec.capacity < vec.len + 1 { 
+        if vec.capacity < 1 {
+            vec.capacity = vec.capacity + 1
+        } elseif vec.capacity > 0 { 
+            vec.capacity = vec.capacity * 2
+        }
+
+        realloc(vec)
+    }
+
+    vec.buffer[vec.len] = element
+    vec.len = vec.len + 1
+    return true
+}
+
+impl get(Vec vec, int index) int {
+    return vec.buffer[index]
+}
+
+impl insert(Vec vec, int index, int element) bool {
+    vec.buffer[index] = element
+    return true
+}
+
+impl first(Vec vec) int {
+    return vec.buffer[0]
+}
+
+impl last(Vec vec) int {
+    return vec.buffer[vec.len-1]
+}
+
+impl main() bool {
+    Vec vec = new()
+    push(vec, 10)
+    push(vec, 60)
+
+    print(first(vec))
+    print(last(vec))
+
+    return true
 }
